@@ -24,6 +24,16 @@ class PessoaController {
     }
   }
 
+  static async pegaAtivos(req, res) {
+    try {
+      const pessoaAtiva = await database.Pessoas.findAll({
+        where: { ativo: false },
+      });
+      return res.status(200).json(pessoaAtiva);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
   static async criaPessoa(req, res) {
     const novaPessoa = req.body;
     try {
